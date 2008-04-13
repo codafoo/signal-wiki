@@ -89,7 +89,7 @@ class Page < ActiveRecord::Base
   end
   
   def locked?
-    locked_at.nil? or locked_at > Time.now
+    !!(locked_at && locked_at < Time.now)
   end
   
   def unlock

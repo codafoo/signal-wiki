@@ -51,6 +51,7 @@ describe Page, "locking pages" do
   
   it "edit a locked page" do
     @page1.lock
+    @page1.locked?.should == true
     @page1.body = "Blah blah"
     @page1.save
     @page1.should_not be_valid
@@ -58,7 +59,9 @@ describe Page, "locking pages" do
   
   it "edit a previous locked but now unlocked page" do
     @page1.lock
+    @page1.locked?.should == true
     @page1.unlock
+    @page1.locked?.should == false
     @page1.body = "Blah blah"
     @page1.save
     @page1.should be_valid
