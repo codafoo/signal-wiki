@@ -1,7 +1,4 @@
 <h2 class="title"><%=h @page.title %></h2>
-
-<div id="flag" title="<%= @page.class.name %>_<%= @page.id %>">Login or sign up to flag this page.</div>
-
 <p class="wiki_body">
   <%= wikified_body(auto_link(@page.body)) %>
 </p>
