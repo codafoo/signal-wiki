@@ -82,7 +82,7 @@ class PagesController < ApplicationController
   def create
     @page = site.pages.new(params[:page])
     @page.request = request
-    @page.user = logged_in? ? current_user : User.new
+    @page.user = logged_in? ? current_user : nil
 
     respond_to do |format|
       if @page.save
@@ -101,7 +101,7 @@ class PagesController < ApplicationController
   def update
     @page = site.pages.find_by_permalink(params[:id])
     @page.request = request
-    @page.user = logged_in? ? current_user : User.new
+    @page.user = logged_in? ? current_user : nil
     
     respond_to do |format|
       if @page.update_attributes(params[:page])
