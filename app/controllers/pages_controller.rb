@@ -20,7 +20,6 @@ class PagesController < ApplicationController
   # GET /pages/1.xml
   def show
     @page = site.pages.find_by_permalink(params[:id] || "home")
-    
     if @page
       @version = @page.versions.find_by_version(@page.version)
       respond_to do |format|
@@ -118,7 +117,8 @@ class PagesController < ApplicationController
   def rollback
     @page = site.pages.find_by_permalink(params[:id])
     @page.revert_to!(params[:version])
-    expire_page("/#{@page.permalink}")
+    expire_fragment("show_#{params[:id]}_0")
+    expire_fragment("show_#{params[:id]}_#{params[:version]}")
     respond_to do |format|
       #flash[:notice] = "#{@page.title} was successfully rolled back to revision #{params[:version]}"
       format.html { redirect_to(wiki_page_url(@page)) }

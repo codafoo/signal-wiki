@@ -13,6 +13,7 @@ class PageSweeper < ActionController::Caching::Sweeper
   def expire_record(permalink,version)
     RAILS_DEFAULT_LOGGER.info "Record to expire is: #{permalink} #{version}"
     expire_fragment("show_#{permalink}_#{version}")
+    expire_fragment("show_#{permalink}_0")
     #expire_page("/#{permalink}")
   end
 

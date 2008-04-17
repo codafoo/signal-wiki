@@ -1,4 +1,4 @@
-<%= render :partial => "page", :locals => {:page => @version} %>
+<%= render :partial => "page", :locals => {:page => @version, :cache_version => @cache_version} %>
 
 <% content_for :right do -%>
 	<%= render :partial => "right", :locals => {:page => @page, :version => @version} %>
