@@ -46,10 +46,10 @@ describe Page, "locking pages" do
   fixtures :sites
   
   before do
-    @page1 = Page.create! :title => "outbound", :permalink => "outbound", :body => "empty", :site_id => 1
+    @page1 = Page.create! :title => "outbound", :permalink => "outbound", :body => "empty", :site_id => sites(:first).id
   end
   
-  it "edit a locked page" do
+  it "edits a locked page" do
     @page1.lock
     @page1.locked?.should == true
     @page1.body = "Blah blah"
@@ -57,7 +57,14 @@ describe Page, "locking pages" do
     @page1.should_not be_valid
   end
   
-  it "edit a previous locked but now unlocked page" do
+  it "sets locked correctly" do
+    @page1.lock
+    @page1.should be_locked
+    @page1.unlock
+    @page1.should_not be_locked
+  end
+  
+  it "edits a previous locked but now unlocked page" do
     @page1.lock
     @page1.locked?.should == true
     @page1.unlock
