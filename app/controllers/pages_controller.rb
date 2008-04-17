@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
   before_filter :require_login, :except => [:index, :show, :revision]
   before_filter :check_private, :only => [:show, :revision]
-  caches_page :show
-  cache_sweeper :page_sweeper, :only => [:create, :update]
+  cache_sweeper :page_sweeper, :only => [:create, :update, :delete]
   include HTMLDiff
   
   # GET /pages
@@ -169,11 +168,11 @@ class PagesController < ApplicationController
   end
   
   #FIXME: Remove this and add a manual cache call for pages we want cached, in the show method.
-  def caching_allowed
-    if @page
-      ! @page.private_page
-    end
-  end
+  # def caching_allowed
+  #   if @page
+  #     ! @page.private_page
+  #   end
+  # end
   
   def require_login
     site.require_login_to_post ? login_required : true
