@@ -2,11 +2,12 @@ module PagesHelper
   
   def wikified_body(body)
     r = RedCloth.new(body)
-    r.gsub!(/\[\[(.*?)(\|(.*?))?\]\]/) { wiki_link($1, $3) }
+    r.gsub!(/\[\[([^(\||\])]*)[|]?([^\]]*)\]\]/) { wiki_link($1, $2) }
     sanitize r.to_html
   end
   
   def wiki_link(wiki_words, link_text = nil)
+    link_text = nil if link_text.empty?
     permalink = wiki_words.downcase.gsub(' ', '-')
     if Page.exists?(:permalink => permalink)
       link_to((link_text || wiki_words), wiki_page_url(permalink))
