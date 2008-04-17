@@ -29,12 +29,15 @@ class SitesController < ApplicationController
   end
 
   def expire_cache
-    pages = Page.find(:all)
-    pages.each do |p| 
-      expire_page("/#{p.permalink}")
-    end
+    # pages = Page.find(:all)
+    # pages.each do |p| 
+    #   expire_fragment("show_#{p.permalink}_#{p.version}")
+    # end
+    expire_fragment(%r{show_\w*})
     flash[:notice] = "Deleted all cached files."
-    redirect_to site_url
+    respond_to do |format|
+      format.html { redirect_to edit_site_url }      
+    end
   end
   
   def mark_all_private
