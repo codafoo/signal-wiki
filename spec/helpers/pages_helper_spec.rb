@@ -9,7 +9,7 @@ describe PagesHelper do
   end
   
   it "parses wiki links" do
-    self.should_receive(:wiki_link).with("up",    nil).and_return("MONKEYS")
+    self.should_receive(:wiki_link).with("up",    "").and_return("MONKEYS")
     self.should_receive(:wiki_link).with("there", "hai").and_return("MONKEYS")
     wikified_body("hello[[there|hai]]whats[[up]]").should == "<p>helloMONKEYSwhatsMONKEYS</p>"
   end
