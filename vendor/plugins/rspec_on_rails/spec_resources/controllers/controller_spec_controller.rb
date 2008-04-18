@@ -10,11 +10,23 @@ class ControllerSpecController < ActionController::Base
   end
   
   def action_with_template
-    session[:session_key] = "session value"
-    flash[:flash_key] = "flash value"
     render :template => "controller_spec/action_with_template"
   end
   
+  def action_which_sets_flash
+    flash[:flash_key] = "flash value"
+    render :text => ""
+  end
+  
+  def action_which_gets_session
+    raise "expected #{params[:session_key].inspect}\ngot #{session[:session_key].inspect}" unless (session[:session_key] == params[:expected])
+    render :text => ""
+  end
+  
+  def action_which_sets_session
+    session[:session_key] = "session value"
+  end
+      
   def action_with_partial
     render :partial => "controller_spec/partial"
   end
@@ -33,8 +45,9 @@ class ControllerSpecController < ActionController::Base
 
   def action_setting_the_assigns_hash
     assigns['direct_assigns_key'] = :direct_assigns_key_value
+    @indirect_assigns_key = :indirect_assigns_key_value
   end
-
+  
   def action_setting_flash_after_session_reset
     reset_session
     flash[:after_reset] = "available"
@@ -43,6 +56,13 @@ class ControllerSpecController < ActionController::Base
   def action_setting_flash_before_session_reset
     flash[:before_reset] = 'available'
     reset_session
+  end
+  
+  def action_with_render_update
+    render :update do |page|
+      page.replace :bottom, 'replace_me',
+                            :partial => 'non_existent_partial'
+    end
   end
 end
 

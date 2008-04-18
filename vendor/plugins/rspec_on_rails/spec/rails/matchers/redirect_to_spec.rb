@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
 ['isolation','integration'].each do |mode|
-  describe "redirect_to behaviour", :behaviour_type => :controller do
+  describe "redirect_to behaviour", :type => :controller do
     if mode == 'integration'
       integrate_views
     end
@@ -19,6 +19,12 @@ require File.dirname(__FILE__) + '/../../spec_helper'
     
     it "redirected to another action (with 'and return')" do
       get 'action_with_redirect_to_somewhere_and_return'
+      response.should redirect_to(:action => 'somewhere')
+    end
+    
+    it "redirected from an SSL action to a non-SSL action" do
+      request.stub!(:ssl?).and_return true
+      get 'action_with_redirect_to_somewhere'
       response.should redirect_to(:action => 'somewhere')
     end
   
@@ -84,7 +90,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
   end
 
   
-  describe "redirect_to with a controller spec in #{mode} mode and a custom request.host", :behaviour_type => :controller do
+  describe "redirect_to with a controller spec in #{mode} mode and a custom request.host", :type => :controller do
     if mode == 'integration'
       integrate_views
     end
@@ -99,7 +105,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
     end
   end
   
-  describe "Given a controller spec in #{mode} mode", :behaviour_type => :controller do
+  describe "Given a controller spec in #{mode} mode", :type => :controller do
     if mode == 'integration'
       integrate_views
     end
@@ -129,7 +135,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
     
   end
   
-  describe "Given a controller spec in #{mode} mode, should redirect_to should fail when", :behaviour_type => :controller do
+  describe "Given a controller spec in #{mode} mode, should redirect_to should fail when", :type => :controller do
     if mode == 'integration'
       integrate_views
     end

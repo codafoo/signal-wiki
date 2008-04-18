@@ -1,17 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
+require File.dirname(__FILE__) + '/ar_classes'
 
-class MockableModel < ActiveRecord::Base
-  has_one :associated_model
-end
-
-class SubMockableModel < MockableModel
-end
-
-class AssociatedModel < ActiveRecord::Base
-  belongs_to :mockable_model
-end
-
-describe "mock_model", :behaviour_type => :view do
+describe "mock_model", :type => :view do
   before(:each) do
     @model = mock_model(SubMockableModel)
   end
@@ -35,7 +25,16 @@ describe "mock_model", :behaviour_type => :view do
   end
 end
 
-describe "mock_model with null_object", :behaviour_type => :view do
+describe "mock_model with stubbed id", :type => :view do
+  before(:each) do
+    @model = mock_model(MockableModel, :id => 1)
+  end
+  it "should be named using the stubbed id value" do
+    @model.instance_variable_get(:@name).should == "MockableModel_1"
+  end
+end
+
+describe "mock_model with null_object", :type => :view do
   before(:each) do
     @model = mock_model(MockableModel, :null_object => true, :mocked_method => "mocked")
   end
@@ -48,7 +47,7 @@ describe "mock_model with null_object", :behaviour_type => :view do
   end
 end
 
-describe "mock_model as association", :behaviour_type => :view do
+describe "mock_model as association", :type => :view do
   before(:each) do
     @real = AssociatedModel.create!
     @mock_model = mock_model(MockableModel)
