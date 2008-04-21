@@ -11,12 +11,12 @@ describe PageSweeper do
     @page_sweeper = PageSweeper.send(:new)
   end
 
-  it "should expire all pages with same permalink" do
-    Page.should_receive(:find_all_by_wiki_word).at_least(1).with("hee haw").and_return @pages
-    @pages.each do |page|
-      page.should_receive(:permalink).at_least(1)
-    end
-    @page_sweeper.should_receive(:expire_page).exactly(3)
-    @page.save
-  end
+  # it "should expire all pages with same permalink" do
+  #   Page.should_receive(:find_all_by_wiki_word).at_least(1).with("hee haw").and_return @pages
+  #   @pages.each do |page|
+  #     page.should_receive(:permalink).at_least(1)
+  #   end
+  #   @page_sweeper.should_receive(:expire_page).exactly(3)
+  #   @page.save
+  # end
 end

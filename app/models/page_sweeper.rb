@@ -6,9 +6,9 @@ class PageSweeper < ActionController::Caching::Sweeper
     #expire_parent_links(record.permalink)
   end
   
-  def after_destroy(product)
-    expire_record(record.permalink,record.version)
-  end
+  # def after_destroy(product)
+  #   expire_record(record.permalink,record.version)
+  # end
   
   def expire_record(permalink,version)
     RAILS_DEFAULT_LOGGER.info "Record to expire is: #{permalink} #{version}"

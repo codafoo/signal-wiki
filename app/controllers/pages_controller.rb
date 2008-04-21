@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_filter :login_required, :only => [:destroy]
   before_filter :require_admin, :only => [:lock]
   before_filter :check_private, :only => [:show, :revision]
-  cache_sweeper :page_sweeper, :only => [:create, :update, :delete]
+  cache_sweeper :page_sweeper, :only => [:create, :update ]
   include HTMLDiff
   
   # GET /pages
@@ -82,7 +82,7 @@ class PagesController < ApplicationController
   def create
     @page = site.pages.new(params[:page])
     @page.request = request
-    @page.user = logged_in? ? current_user : nil
+    @page.user_id = (logged_in? ? current_user.id : nil)
 
     respond_to do |format|
       if @page.save
@@ -101,7 +101,7 @@ class PagesController < ApplicationController
   def update
     @page = site.pages.find_by_permalink(params[:id])
     @page.request = request
-    @page.user = logged_in? ? current_user : nil
+    @page.user_id = (logged_in? ? current_user.id : nil)
     
     respond_to do |format|
       if @page.update_attributes(params[:page])
