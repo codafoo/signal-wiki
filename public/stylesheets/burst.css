@@ -2,10 +2,6 @@
 		General Style
  ------------------------------------------------------------------------------------ */
 
-textarea {
-	width: 99%;
-}
-
 hr {
   background: #ddd; 
   color: #ddd;
@@ -26,7 +22,7 @@ hr {
 /* Default font settings. 
    The font-size percentage is of 16px. (0.75 * 16px = 12px) */
 body { 
-  font-size: 75%;
+  font-size: 80%;
   color: #222; 
   background: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -55,7 +51,7 @@ h4 img, h5 img, h6 img {
 /* Text elements
 -------------------------------------------------------------- */
 
-p           { margin: 0 0 1.5em; }
+p           { margin: 0 0 1.5em; line-height: 1.5em;}
 p img       { float: left; margin: 1.5em 1.5em 1.5em 0; padding: 0; }
 p img.right { float: right; margin: 1.5em 0 1.5em 1.5em; }
 
@@ -127,8 +123,6 @@ caption     { background: #eee; }
  ------------------------------------------------------------------------------------ */
 #header {
 	width: 100%;
-	padding: 10px 0;
-	margin-bottom: 10px;
 	border-bottom: 2px dotted #666;
 }
 
@@ -144,12 +138,25 @@ caption     { background: #eee; }
 #main {
 	width: 100%;
 	float: left;
-	border-right: 1px dotted #999;
+	margin: 10px;
+	border-right: 1px dotted #666;
 }
 
 #side {
 	width: 175px;
 	float: right;
+}
+
+/* ------------------------------------------------------------------------------------
+		Form Styles
+ ------------------------------------------------------------------------------------ */
+
+textarea {
+	width: 99%;
+}
+
+label {
+	font-weight: bold;
 }
 
 /* ------------------------------------------------------------------------------------

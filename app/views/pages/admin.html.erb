@@ -1,0 +1,21 @@
+<h2>Manage <%= @page.title %></h2>
+
+<%= error_messages_for :page %>
+
+<% form_for(@page) do |f| %>
+	<p>
+		<label for="admin_text">Admin Text</label>
+		<%= f.text_area :admin_text %>
+	</p>
+	<p>
+	<label for="private_page">Make page private</label>
+	  <%= f.check_box :private_page %>
+	</p>
+	<p>
+	<label for="lock_page">Lock page</label>
+		<%= f.check_box :lock_page %>
+	</p>
+	<%= f.submit "Update Page"%>
+<% end %>
+
+<%= link_to 'Show', @page %> | <%= link_to 'Back', pages_path %>

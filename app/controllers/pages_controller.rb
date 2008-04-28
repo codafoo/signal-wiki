@@ -17,6 +17,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def preview
+    @preview = params[:data]
+    
+    respond_to do |format|
+      format.html { render :layout => 'blank'}
+    end
+  end
+
   # GET /pages/1
   # GET /pages/1.xml
   def show
@@ -135,7 +143,25 @@ class PagesController < ApplicationController
       format.js
     end
   end
-
+  
+  def admin
+    @page = site.pages.find_by_permalink(params[:id])
+    respond_to do |format|
+      format.html #{ redirect_to(wiki_page_url(@page)) }
+      format.xml
+    end
+  end
+  
+  def comment
+    @page = site.pages.find_by_permalink(params[:id])
+    respond_to do |format|
+      format.html { 
+        redirect_to(wiki_page_url(@page)) 
+      }
+      format.xml
+    end
+  end
+  
   # DELETE /pages/1
   # DELETE /pages/1.xml
   def destroy

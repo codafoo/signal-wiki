@@ -6,7 +6,20 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resource :site, :member => {:expire_cache => :get, :mark_all_private => :get}
   map.resources :users 
-  map.resources :pages, :member => {:revision => :get, :rollback => :get, :lock => :get, :revisions => :get, :diff => :get}, :collection => {:search => :get}
+  map.resources :pages, 
+                :member => {
+                  :admin=> :any, 
+                  :comment => :post, 
+                  :revision => :get, 
+                  :rollback => :get, 
+                  :lock => :get, 
+                  :revisions => :get, 
+                  :diff => :get
+                }, 
+                :collection => {
+                  :search => :get,
+                  :preview => :any
+                }
   map.resources :attachments
 
   map.login  '/login',  :controller => 'sessions', :action => 'new'

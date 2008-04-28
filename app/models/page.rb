@@ -21,11 +21,12 @@ class Page < ActiveRecord::Base
   belongs_to :site
   # has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
   # has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
+  has_many :comments
   acts_as_versioned
   self.non_versioned_columns << 'locked_at'
-  attr_accessor :ip, :agent, :referrer
+  self.non_versioned_columns << 'admin_text'
+  attr_accessor :ip, :agent, :referrer, :lock_page
   acts_as_indexed :fields => [:title, :body, :author]
-
   can_be_flagged :reasons => [:spam, :outdated, :inaccurate]
   
   before_save :set_permalink

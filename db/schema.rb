@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 15) do
+ActiveRecord::Schema.define(:version => 20080428063238) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "size"
@@ -30,6 +30,19 @@ ActiveRecord::Schema.define(:version => 15) do
     t.string   "flaggable_type"
     t.integer  "flaggable_user_id"
     t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "labeled_pages", :force => true do |t|
+    t.integer  "label_id"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "labels", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -80,6 +93,7 @@ ActiveRecord::Schema.define(:version => 15) do
     t.integer  "version"
     t.integer  "site_id"
     t.datetime "locked_at"
+    t.text     "admin_text"
   end
 
   create_table "sites", :force => true do |t|

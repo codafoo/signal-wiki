@@ -1,0 +1,5 @@
+<% form_tag comment_page_path(@page) do |f| %>
+	<label>Add a Comment:</label>
+	<%= text_area_tag "comment", nil, :rows => 5 %>
+	<%= submit_tag "Add a Comment" %>
+<% end %>

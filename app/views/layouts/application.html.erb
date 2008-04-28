@@ -3,9 +3,14 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><%= site.title %> <%= ("- " + @page.title ) if @page %></title>
-	<%= javascript_include_tag :all, :cache => "burstwiki" %>
+	<%= javascript_include_tag "jquery-1.2.3.min.js", :cache => "burstwiki" %>
+	<%= javascript_include_tag "../markitup/jquery.markitup.js", :cache => "burstwiki" %>
+	<%= javascript_include_tag "../markitup/sets/textile/set.js", :cache => "burstwiki" %>
+	<%= javascript_include_tag "application", :cache => "burstwiki" %>
 	<%= stylesheet_link_tag 'reset', :cache => "burstwiki" %>
 	<%= stylesheet_link_tag 'burst', :cache => "burstwiki" %>
+	<%= stylesheet_link_tag '../markitup/skins/markitup/style.css', :cache => "burstwiki" %>
+	<%= stylesheet_link_tag '../markitup/sets/textile/style.css', :cache => "burstwiki" %>
 </head>
 <body id="<%= controller.controller_name %>">
 	<div id="header" class="clearfix">
