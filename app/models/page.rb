@@ -19,8 +19,8 @@
 class Page < ActiveRecord::Base
   belongs_to :user
   belongs_to :site
-  has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
-  has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
+  # has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
+  # has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
   acts_as_versioned
   self.non_versioned_columns << 'locked_at'
   attr_accessor :ip, :agent, :referrer
@@ -31,7 +31,7 @@ class Page < ActiveRecord::Base
   before_save :set_permalink
   # before_update :set_links
   # after_create  :set_links
-  after_save  :set_links
+  #after_save  :set_links
   validates_presence_of :title, :body
   validate_on_update :updatable
 
@@ -60,19 +60,19 @@ class Page < ActiveRecord::Base
     end
   end
     
-  def set_links
-    Link.transaction do
-      # outbound_links.delete_all
-      body.scan(/\[\[([^\]]*)\]\]/).each do |link|
-        link = link[0].downcase.gsub(' ', '-')
-        if page = site.pages.find_by_permalink(link)
-          Link.create! :from_page_id => id, :to_page_id => page.id
-        else
-          logger.warn "We couldn't find links for #{link}"
-        end
-      end
-    end
-  end
+  # def set_links
+  #   Link.transaction do
+  #     # outbound_links.delete_all
+  #     body.scan(/\[\[([^\]]*)\]\]/).each do |link|
+  #       link = link[0].downcase.gsub(' ', '-')
+  #       if page = site.pages.find_by_permalink(link)
+  #         Link.create! :from_page_id => id, :to_page_id => page.id
+  #       else
+  #         logger.warn "We couldn't find links for #{link}"
+  #       end
+  #     end
+  #   end
+  # end
   
   def to_param
     self.permalink
