@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.integer :page_id, :site_id
+      t.integer :page_id, :site_id, :user_id
       t.string  :subject, :author
       t.text    :body
       t.timestamps
