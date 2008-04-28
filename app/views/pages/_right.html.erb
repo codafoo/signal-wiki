@@ -5,6 +5,7 @@
 	<li><%= link_to 'View previous revision', revision_page_url(:id => page.permalink, :version => version.previous.version) if version.previous %></li>
 	<li><%= link_to 'View next revision', revision_page_url(:id => page.permalink, :version => version.next.version) if version.next %></li>
 	<li><%= link_to((page.locked? ? "Unlock this page" : "Lock this page"), lock_page_path(page)) if admin? %></li>	
+	<li><%= link_to 'Admin Actions', admin_page_path(page) if admin? %></li>
 	<% if page.version == version.version %>
 		<li><%= link_to 'Edit this page', edit_page_path(page) unless page.locked? && !admin? %></li>		
 		<li><%= link_to "Delete this page and all revisions", page_path(page), :method => :delete if admin? && page.permalink != 'home' %></li>

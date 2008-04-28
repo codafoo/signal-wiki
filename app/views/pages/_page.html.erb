@@ -1,5 +1,10 @@
-<!-- <%= "This page was cached at #{Time.now()}" %> -->	
+<!-- <%= "This page was cached at #{Time.now()}" %> -->
 <h2><%= link_to page.title, wiki_page_url(page.permalink) %></h2>
+<% unless page.page.admin_text.blank? %>
+	<div class="admin_text">
+		<%= wikified_body(page.page.admin_text) %>
+	</div>
+<% end %>
 <p class="wiki_body">
   <%= wikified_body(page.body) %>
 </p>

@@ -1,5 +1,23 @@
+<% @page.comments.each do |comment| %>
+<div class="comment clearfix">
+	<div class="comment-image">
+	<%= image_tag(gravatar_url(comment.user.email), :class => "gravatar") if comment.user.email %>
+	</div>
+	<div class="comment-header">
+		<b><%= comment.user.login.capitalize %> says:</b> (<%= time_ago_in_words(comment.created_at) %> ago)
+		<br/>
+	</div>
+	<div class="comment-body clearfix">
+	<%= comment.body %>
+	</div>
+</div>
+<hr/>
+<% end %>
+
+<% if logged_in? %>
 <% form_tag comment_page_path(@page) do |f| %>
 	<label>Add a Comment:</label>
 	<%= text_area_tag "comment", nil, :rows => 5 %>
 	<%= submit_tag "Add a Comment" %>
+<% end %>
 <% end %>

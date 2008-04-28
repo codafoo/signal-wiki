@@ -22,9 +22,14 @@ class Page < ActiveRecord::Base
   # has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
   # has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
   has_many :comments
+  has_many :labeled_pages
+  has_many :labels, :through => :labeled_pages
+  
   acts_as_versioned
   self.non_versioned_columns << 'locked_at'
   self.non_versioned_columns << 'admin_text'
+  self.non_versioned_columns << 'private_page'
+  
   attr_accessor :ip, :agent, :referrer, :lock_page
   acts_as_indexed :fields => [:title, :body, :author]
   can_be_flagged :reasons => [:spam, :outdated, :inaccurate]

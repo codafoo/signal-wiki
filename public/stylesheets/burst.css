@@ -138,11 +138,14 @@ caption     { background: #eee; }
 #main {
 	width: 100%;
 	float: left;
-	margin: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
+	padding-right: 10px;
 	border-right: 1px dotted #666;
 }
 
 #side {
+	margin-top: 10px;
 	width: 175px;
 	float: right;
 }
@@ -157,6 +160,32 @@ textarea {
 
 label {
 	font-weight: bold;
+}
+/* ------------------------------------------------------------------------------------
+		Wiki Styles
+ ------------------------------------------------------------------------------------ */
+.admin_text {
+	background-color: #fcc;
+	padding: 5px;
+	border: 1px solid #f00;
+}
+/* ------------------------------------------------------------------------------------
+		Comment Styles
+ ------------------------------------------------------------------------------------ */
+.comment-image {
+	position: relative;
+	float: left;
+}
+.comment-header {
+	margin-left: 50px;
+}
+.comment-body {
+	margin-top: 10px;
+	margin-left: 50px;
+}
+.comment {
+	vertical-align: baseline;
+	display: block;
 }
 
 /* ------------------------------------------------------------------------------------

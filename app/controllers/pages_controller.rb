@@ -154,6 +154,10 @@ class PagesController < ApplicationController
   
   def comment
     @page = site.pages.find_by_permalink(params[:id])
+    @comment=@page.comments.build
+    @comment.body = params[:comment]
+    @comment.user = @current_user
+    @comment.save
     respond_to do |format|
       format.html { 
         redirect_to(wiki_page_url(@page)) 
