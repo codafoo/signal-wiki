@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
   self.non_versioned_columns << 'admin_text'
   self.non_versioned_columns << 'private_page'
   
-  attr_accessor :ip, :agent, :referrer, :lock_page
+  attr_accessor :ip, :agent, :referrer
   acts_as_indexed :fields => [:title, :body, :author]
   can_be_flagged :reasons => [:spam, :outdated, :inaccurate]
   
@@ -52,6 +52,20 @@ class Page < ActiveRecord::Base
     response = v.check_comment(:comment_content => body.to_s, :comment_author => username.to_s, :user_ip => ip.to_s, :user_agent => agent.to_s, :referrer => referrer.to_s)
     logger.info "Calling Akismet for page #{permalink} by #{username.to_s} using ip #{ip}:  #{response[:spam]}"
     return response[:spam]
+  end
+  
+  def lock_page
+    (!locked_at.nil? && locked_at < Time.now)
+  end
+  
+  def lock_page=(val)
+    if val=='1'
+      self[:locked_at]=Time.now
+      true
+    else
+      self[:locked_at]=nil
+      false
+    end
   end
   
   def request=(request)
@@ -123,7 +137,7 @@ class Page < ActiveRecord::Base
   
   def updatable
     unless self.locked_at.nil?
-      errors.add("page", "is locked from editing.")
+      errors.add("page", "is locked from editing.") unless self.lock_page
     end
   end
   
