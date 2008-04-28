@@ -1,20 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title><%= site.title %> <%= ("- " + @page.title ) if @page %></title>
-	<%= javascript_include_tag :all, :cache => "signal" %>
-	<%= stylesheet_link_tag :all, :cache => "signal" %>
+	<%= javascript_include_tag :all, :cache => "burstwiki" %>
+	<%= stylesheet_link_tag 'reset', :cache => "burstwiki" %>
+	<%= stylesheet_link_tag 'burst', :cache => "burstwiki" %>
 </head>
 <body id="<%= controller.controller_name %>">
-
-	<div id="header">
+	<div id="header" class="clearfix">
 		<div id="navbar">
 		  <%= render :partial => "shared/navbar" %>
 		</div>
 		<h1><%= link_to site.title, wiki_page_url("home"), :id => "site_name" %></h1>
 	</div><!-- end #header -->
+	
+	<div id="side">
+	  <%= yield :side %>
+	</div><!-- end #side -->
 	
 	<div id="container">
 		<div id="main">
@@ -27,11 +30,7 @@
 			<% end %>
 			<%= yield %>
 		</div><!-- end #main -->
-		
-		<div id="right">
-		  <%= yield :right %>
-		</div><!-- end #right -->
-		
+				
 	</div><!-- end #container -->
 
 </body>

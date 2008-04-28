@@ -1,6 +1,5 @@
-<%= render :partial => "flag", :locals => {:flag => @page} %>
 <%= render :partial => "page", :locals => {:page => @version,:cache_version => 0} %>
 
-<% content_for :right do -%>
+<% content_for :side do -%>
 	<%= render :partial => "right", :locals => {:page => @page, :version => @version}%>
 <% end -%>
