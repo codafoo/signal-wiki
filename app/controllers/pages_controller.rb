@@ -156,7 +156,7 @@ class PagesController < ApplicationController
     @page = site.pages.find_by_permalink(params[:id])
     @comment=@page.comments.build
     @comment.body = params[:comment]
-    @comment.user = @current_user
+    @comment.user_id = (logged_in? ? current_user.id : nil)
     @comment.save
     respond_to do |format|
       format.html { 

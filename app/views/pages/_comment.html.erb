@@ -1,10 +1,10 @@
 <% @page.comments.each do |comment| %>
 <div class="comment clearfix">
 	<div class="comment-image">
-	<%= image_tag(gravatar_url(comment.user.email), :class => "gravatar") if comment.user.email %>
+	<%= image_tag(gravatar_url(comment.user_email), :class => "gravatar") if comment.user_email %>
 	</div>
 	<div class="comment-header">
-		<b><%= comment.user.login.capitalize %> says:</b> (<%= time_ago_in_words(comment.created_at) %> ago)
+		<b><%= comment.user_name %> says:</b> (<%= time_ago_in_words(comment.created_at) %> ago)
 		<br/>
 	</div>
 	<div class="comment-body clearfix">
