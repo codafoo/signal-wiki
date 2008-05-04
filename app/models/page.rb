@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
   has_many :labeled_pages
   has_many :labels, :through => :labeled_pages
   
-  acts_as_versioned
+  acts_as_versioned :if_changed => [:body,:title,:user_id]
   self.non_versioned_columns << 'locked_at'
   self.non_versioned_columns << 'admin_text'
   self.non_versioned_columns << 'private_page'
