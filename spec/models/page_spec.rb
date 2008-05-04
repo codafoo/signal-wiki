@@ -33,28 +33,29 @@ describe Page, "validity" do
   end
 end
 
-describe Page, "creating links" do
-  fixtures :sites
-
-  before do
-    @page1 = Page.create! :title => "outbound", :permalink => "outbound", :body => "empty", :site_id => 1
-    @page2 = Page.new :title => "hi!", :body => "This is my page [[outbound]]", :site_id => 1
-  end
-  
-  it "creates a link" do
-    c = Link.count
-    @page2.save!
-    Link.count.should == c+1
-    #lambda{ @page2.save! }.should change { Link.count }.by(1)
-  end
-  
-  it "creates a new empty wiki link" do
-    @page1.body = "New wiki test [[link]]"
-    @page1.save!
-    @page1.should be_valid
-  end
-  
-end  
+# Forget Links for now.
+# describe Page, "creating links" do
+#   fixtures :sites
+# 
+#   before do
+#     @page1 = Page.create! :title => "outbound", :permalink => "outbound", :body => "empty", :site_id => 1
+#     @page2 = Page.new :title => "hi!", :body => "This is my page [[outbound]]", :site_id => 1
+#   end
+#   
+#   it "creates a link" do
+#     c = Link.count
+#     @page2.save!
+#     Link.count.should == c+1
+#     #lambda{ @page2.save! }.should change { Link.count }.by(1)
+#   end
+#   
+#   it "creates a new empty wiki link" do
+#     @page1.body = "New wiki test [[link]]"
+#     @page1.save!
+#     @page1.should be_valid
+#   end
+#   
+# end  
 
 describe Page, "locking pages" do
   fixtures :sites
