@@ -59,7 +59,7 @@ class Page < ActiveRecord::Base
   end
   
   def lock_page=(val)
-    if val=='1'
+    if val=='1' || val==true
       self[:locked_at]=Time.now
       true
     else
@@ -136,8 +136,8 @@ class Page < ActiveRecord::Base
   private
   
   def updatable
-    unless self.locked_at.nil?
-      errors.add("page", "is locked from editing.") unless self.lock_page
+    if self.locked?
+      errors.add("page", "is locked from editing.")
     end
   end
   
