@@ -22,6 +22,7 @@ class Page < ActiveRecord::Base
   # has_many :inbound_links,  :class_name => "Link", :foreign_key => "to_page_id"
   # has_many :outbound_links, :class_name => "Link", :foreign_key => "from_page_id"
   has_many :comments
+  has_many :attachments
   has_many :labeled_pages
   has_many :labels, :through => :labeled_pages
   

@@ -82,6 +82,7 @@ class PagesController < ApplicationController
   # GET /pages/1/edit
   def edit
     @page = site.pages.find_by_permalink(params[:id])
+    @attachments = @page.attachments
     @button_text = "Save this version"
   end
 
@@ -150,6 +151,10 @@ class PagesController < ApplicationController
       format.html #{ redirect_to(wiki_page_url(@page)) }
       format.xml
     end
+  end
+  
+  def remove_comment
+    
   end
   
   def comment
