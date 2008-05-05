@@ -18,7 +18,7 @@ class Site < ActiveRecord::Base
   has_many :pages
 
   def title
-    super || "Signal"
+    super || "Burst"
   end
   
 end
